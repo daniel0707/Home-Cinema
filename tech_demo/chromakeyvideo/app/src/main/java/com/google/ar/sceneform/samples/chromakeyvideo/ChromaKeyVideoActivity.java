@@ -34,6 +34,7 @@ import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.Node;
+import com.google.ar.sceneform.math.Quaternion;
 import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.Color;
 import com.google.ar.sceneform.rendering.ExternalTexture;
@@ -116,6 +117,7 @@ public class ChromaKeyVideoActivity extends AppCompatActivity {
           // Create a node to render the video and add it to the anchor.
           Node videoNode = new Node();
           videoNode.setParent(anchorNode);
+          videoNode.setLocalRotation(Quaternion.axisAngle(new Vector3(1f, 0f, 0f), 90f));
 
           // Set the scale of the node so that the aspect ratio of the video is correct.
           float videoWidth = mediaPlayer.getVideoWidth();
@@ -127,7 +129,7 @@ public class ChromaKeyVideoActivity extends AppCompatActivity {
           // Start playing the video when the first node is placed.
           if (!mediaPlayer.isPlaying()) {
             mediaPlayer.start();
-
+            System.out.println("video is now playing");
             // Wait to set the renderable until the first frame of the  video becomes available.
             // This prevents the renderable from briefly appearing as a black quad before the video
             // plays.
@@ -139,7 +141,9 @@ public class ChromaKeyVideoActivity extends AppCompatActivity {
                       texture.getSurfaceTexture().setOnFrameAvailableListener(null);
                     });
           } else {
-            videoNode.setRenderable(videoRenderable);
+              System.out.println("we hit ELSE");
+
+              videoNode.setRenderable(videoRenderable);
           }
         });
   }
