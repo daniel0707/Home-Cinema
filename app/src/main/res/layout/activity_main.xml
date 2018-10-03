@@ -36,17 +36,21 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="75dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:gravity="center"
             android:text="Choose a video"
             android:textColor="@color/colorText"
+            android:background="@drawable/headerbackground"
             android:textSize="20sp" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_video_list"
         android:layout_width="match_parent"
+        android:scrollbars="vertical"
         android:layout_height="match_parent"
-        android:layout_marginTop="150dp" />
+        android:layout_marginTop="125dp" />
 
 
 </android.support.constraint.ConstraintLayout>
