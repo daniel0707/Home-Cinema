@@ -8,7 +8,7 @@
     <TextView
         android:clickable="true"
         android:focusable="true"
-        android:id="@+id/tv_video_type"
+        android:id="@+id/tv_video_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
@@ -17,6 +17,6 @@
         android:background="@drawable/back"
         android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
 </LinearLayout>

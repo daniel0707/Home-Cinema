@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.video_list_item.view.*
 
 class VideoAdapter(val items : ArrayList<String>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
-    // Gets the number of animals in the list
+    // Gets the number of videos in the list
     override fun getItemCount(): Int {
         return items.size
     }
@@ -19,13 +19,12 @@ class VideoAdapter(val items : ArrayList<String>, val context: Context) : Recycl
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.video_list_item, parent, false))
     }
 
-    // Binds each animal in the ArrayList to a view
+    //sets the video name to the textview
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvVideoName.text = items.get(position)
     }
 }
 
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-    // Holds the TextView that will add each animal to
-    val tvVideoName = view.tv_video_type
+    val tvVideoName = view.tv_video_name
 }

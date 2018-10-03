@@ -18,11 +18,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
-        button.setOnClickListener {
+
+        /* button.setOnClickListener {
+
+        //TODO implement this functionality to recyclerView element clicks
             val reqID = 1
             val intent = Intent(this,VideoActivity::class.java)
             startActivityForResult(intent,reqID)
-        }
+        }*/
+
         super.onCreate(savedInstanceState)
 
         addVideos()
