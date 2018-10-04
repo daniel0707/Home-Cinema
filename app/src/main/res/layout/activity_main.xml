@@ -16,7 +16,20 @@
         android:minHeight="?attr/actionBarSize"
         android:padding="1dp"
         app:subtitleTextColor="#f5fbff"
-        app:titleTextColor="#fff" />
+        app:titleTextColor="#fff"
+        android:gravity="center">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginStart="50dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText"
+        android:gravity="center"
+        android:textSize="20sp"
+        tools:text="Some title"
+        android:id="@+id/toolbar_text"
+        />
+    </android.support.v7.widget.Toolbar>
 
 
     <LinearLayout

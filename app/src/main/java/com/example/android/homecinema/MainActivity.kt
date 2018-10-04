@@ -4,13 +4,18 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_main.*
 import android.transition.Fade
 import android.transition.TransitionManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,18 +45,16 @@ class MainActivity : AppCompatActivity() {
         // Now get the support action bar
         val actionBar = supportActionBar
 
-        // Set toolbar title/app title
-        actionBar!!.title = "HomeCinema"
-
-
         // Set action bar elevation
-        actionBar.elevation = 4.0F
+        actionBar!!.elevation = 4.0F
 
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu to use in the action bar
         val inflater = menuInflater
         inflater.inflate(R.menu.homecinemamenu, menu)
+        // Set toolbar title
+        toolbar_text.text = "HomeCinema"
         return super.onCreateOptionsMenu(menu)
     }
 
