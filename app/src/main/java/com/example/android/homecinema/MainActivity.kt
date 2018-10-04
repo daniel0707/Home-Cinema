@@ -63,7 +63,10 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.action_settings -> {
                 Log.i("DBG", "CLICKED")
-                //TODO open settings activity
+                val intent = Intent(applicationContext, SettingsActivity::class.java)
+                startActivity(intent)
+                overridePendingTransition(R.transition.slide_righttoleft, R.transition.hold)
+
                 return true
             }
         }
