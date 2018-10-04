@@ -1,20 +1,19 @@
 package com.example.android.homecinema
 
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_main.*
 import android.transition.Fade
+import android.transition.Slide
 import android.transition.TransitionManager
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-
+import android.view.*
+import android.widget.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -47,8 +46,8 @@ class MainActivity : AppCompatActivity() {
 
         // Set action bar elevation
         actionBar!!.elevation = 4.0F
-
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu to use in the action bar
         val inflater = menuInflater

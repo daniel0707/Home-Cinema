@@ -5,7 +5,7 @@
     >
     <item
         android:id="@+id/action_settings"
-        android:icon="@drawable/outline_settings_white_18dp"
+        android:icon="@drawable/ic_outline_settings_24px"
         android:title="settings"
         app:showAsAction="ifRoom"/>
 </menu>
