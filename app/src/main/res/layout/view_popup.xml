@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/back"
+    android:orientation="vertical"
+    android:padding="5dp">
+    <!-- close popup-->
+    <ImageView
+        android:id="@+id/view_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="3dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/ic_outline_close_24px"
+        android:text="Close Me" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="Type a preferred window size for the AR object that renders your videos into the camera view:" />
+
+    <EditText
+        android:id="@+id/view_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input a height"
+        android:inputType="number"
+        android:layout_marginBottom="10dp"
+        android:textColor="#777" />
+
+    <EditText
+        android:id="@+id/view_width"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input a width"
+        android:inputType="number"
+        android:textColor="#777" />
+
+    <TextView
+        android:id="@+id/customDimensions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Default object size is 100cm by 100cm"
+        android:textColor="#777" />
+</LinearLayout>
