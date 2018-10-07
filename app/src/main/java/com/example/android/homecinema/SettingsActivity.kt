@@ -16,6 +16,12 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_settings.*
+import java.lang.Compiler.disable
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothProfile
+import kotlinx.android.synthetic.main.bluetooth_popup.*
+
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -31,7 +37,18 @@ class SettingsActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.transition.slide_lefttoright, R.transition.hold)
+        }
 
+        //Check if bluetooth is already on and change details text to On
+        val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        if (mBluetoothAdapter.state == BluetoothAdapter.STATE_ON){
+            bluetooth_details.text = "On | "
+        }
+        //Check if bluetooth is connected to an audio device and set text accordingly
+        if(mBluetoothAdapter.getProfileConnectionState(BluetoothProfile.A2DP) == BluetoothAdapter.STATE_CONNECTED){
+            bluetoothconnection_details.text = "Connected"
+        } else if (mBluetoothAdapter.state == BluetoothAdapter.STATE_ON) {
+            bluetoothconnection_details.text = "Disconnected"
         }
 
         // BLUETOOTH
@@ -77,6 +94,7 @@ class SettingsActivity : AppCompatActivity() {
                 view, // Custom view to show in popup window, set popup size
                 width - 50, 1000
         )
+        //make window closeable if user clicks outside of it
         popupWindow.isOutsideTouchable = true
         // If API level 23 or higher then execute the code
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -88,10 +106,18 @@ class SettingsActivity : AppCompatActivity() {
 
         // Get the widgets reference from custom view
         val bluetoothClose = view.findViewById<ImageView>(R.id.bluetooth_close)
+
+        // Get bluetooth adapter
+        val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+
         // Set a click listener for popup's button widget
         bluetoothClose.setOnClickListener {
-            // Dismiss the popup window
+            // Dismiss the popup window & check bluetooth connection state
+            if(mBluetoothAdapter.getProfileConnectionState(BluetoothProfile.A2DP) == BluetoothAdapter.STATE_CONNECTED) {
+                bluetoothconnection_details.text = "Connected"
+            }
             popupWindow.dismiss()
+
         }
 
 
@@ -103,6 +129,31 @@ class SettingsActivity : AppCompatActivity() {
                 0, // X offset
                 0 // Y offset
         )
+
+
+        val switchButton = view.findViewById<Switch>(R.id.switch_button)
+        switchButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                // The switch is enabled/checked
+                val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+                if (!mBluetoothAdapter.isEnabled) {
+                    mBluetoothAdapter.enable()
+                    bluetooth_details.text = "On | "
+                    //open Android bluetooth connection menu
+                    startActivity( Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS))
+                }
+            } else {
+                // The switch is disabled
+                val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+                mBluetoothAdapter.disable()
+                bluetooth_details.text = "Off"
+                //set connection state textview to empty
+                bluetoothconnection_details.text = ""
+            }
+        }
+        if (mBluetoothAdapter.state == BluetoothAdapter.STATE_ON){
+            switchButton.isChecked = true
+        }
     }
 
     private fun viewPopup() {
