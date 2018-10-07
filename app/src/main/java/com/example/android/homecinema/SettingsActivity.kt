@@ -5,7 +5,8 @@ import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.Explode
+import android.text.Editable
+import android.text.TextWatcher
 import android.transition.Slide
 import android.transition.TransitionManager
 import android.util.DisplayMetrics
@@ -13,18 +14,14 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.Menu
-import android.view.MenuItem
 import android.widget.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_settings.*
-import kotlinx.android.synthetic.main.bluetooth_popup.*
-import kotlinx.android.synthetic.main.help_popup.*
-import kotlinx.android.synthetic.main.view_popup.*
 
 class SettingsActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
@@ -37,18 +34,24 @@ class SettingsActivity : AppCompatActivity() {
 
         }
 
+        // BLUETOOTH
         bluetoothButton.setOnClickListener {
+            //open bluetooth popup
             bluetoothPopup()
         }
 
-        // VIEW FIELD OF SETTING ACTIVITY
+        // VIEW
         viewButton.setOnClickListener {
+            //open view popup
             viewPopup()
         }
 
+        // HELP
         helpButton.setOnClickListener {
+            //open help popup
             helpPopup()
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -68,7 +71,7 @@ class SettingsActivity : AppCompatActivity() {
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
 
-        var width = displayMetrics.widthPixels
+        val width = displayMetrics.widthPixels
         // Initialize a new instance of popup window
         val popupWindow = PopupWindow(
                 view, // Custom view to show in popup window, set popup size
@@ -113,7 +116,7 @@ class SettingsActivity : AppCompatActivity() {
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
 
-        var width = displayMetrics.widthPixels
+        val width = displayMetrics.widthPixels
         // Initialize a new instance of popup window
         val popupWindow = PopupWindow(
                 view, // Custom view to show in popup window, set popup size
@@ -137,10 +140,11 @@ class SettingsActivity : AppCompatActivity() {
         // Set a click listener for popup's button widget
         viewClose.setOnClickListener {
             // Dismiss the popup window & show what the user added as new dimensions for the AR object in settingsView
-            val inputHeight = view.findViewById<EditText>(R.id.view_height).text
-            val inputWidth = view.findViewById<EditText>(R.id.view_width).text
-            view_details.text = "$inputHeight" + "x" + "$inputWidth"
             popupWindow.dismiss()
+            val customDimensionsHeight = view.findViewById<TextView>(R.id.customDimensionHeight).text
+            val customDimensionsWidth = view.findViewById<TextView>(R.id.customDimensionWidth).text
+
+            view_details.text = "$customDimensionsHeight" + "x" + "$customDimensionsWidth"
         }
 
         // Finally, show the popup window on app
@@ -151,6 +155,42 @@ class SettingsActivity : AppCompatActivity() {
                 0, // X offset
                 0 // Y offset
         )
+
+        //values for popup edit fields
+        val inputHeight = view.findViewById<EditText>(R.id.view_height)
+        val inputWidth = view.findViewById<EditText>(R.id.view_width)
+
+        //Height edit field change listener that changes customDimensions textview to display what the user input was
+        inputHeight.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                val customDimensionsHeight = view.findViewById<TextView>(R.id.customDimensionHeight)
+                customDimensionsHeight.setText(s)
+            }
+        })
+
+        //Width edit field change listener that changes customDimensions textview to display what the user input was
+        inputWidth.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                val customDimensionsWidth = view.findViewById<TextView>(R.id.customDimensionWidth)
+                customDimensionsWidth.setText(s)
+            }
+        })
     }
 
     private fun helpPopup() {
@@ -164,7 +204,7 @@ class SettingsActivity : AppCompatActivity() {
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
 
-        var width = displayMetrics.widthPixels
+        val width = displayMetrics.widthPixels
         // Initialize a new instance of popup window
         val popupWindow = PopupWindow(
                 view, // Custom view to show in popup window, set popup size

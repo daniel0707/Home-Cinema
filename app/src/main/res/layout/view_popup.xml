@@ -29,9 +29,9 @@
         android:id="@+id/view_height"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:hint="Input a height"
         android:inputType="number"
-        android:layout_marginBottom="10dp"
         android:textColor="#777" />
 
     <EditText
@@ -42,10 +42,39 @@
         android:inputType="number"
         android:textColor="#777" />
 
-    <TextView
-        android:id="@+id/customDimensions"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Default object size is 100cm by 100cm"
-        android:textColor="#777" />
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/customDimensions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Current object size: "
+            android:textColor="#777" />
+
+        <TextView
+            android:id="@+id/customDimensionHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="100" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="x" />
+
+        <TextView
+            android:id="@+id/customDimensionWidth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_weight="1"
+            android:text="100" />
+    </LinearLayout>
 </LinearLayout>
