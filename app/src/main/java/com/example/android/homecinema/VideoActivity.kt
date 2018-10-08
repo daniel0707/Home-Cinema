@@ -76,6 +76,7 @@ class VideoActivity : AppCompatActivity(){
 
                     var videoNode = Node()
                     videoNode.setParent(anchorNode)
+                    videoNode.localRotation=(Quaternion.axisAngle(Vector3(1f,0f,0f),90f))
 
                     val videoWidth  = mediaPlayer.videoWidth.toFloat()
                     val videoHeight = mediaPlayer.videoHeight.toFloat()
