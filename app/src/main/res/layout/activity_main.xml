@@ -57,13 +57,21 @@
             android:background="@drawable/headerbackground"
             android:textSize="20sp" />
     </LinearLayout>
-
+<!-- changed to Linear Layout
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_video_list"
         android:layout_width="match_parent"
         android:scrollbars="vertical"
         android:layout_height="match_parent"
         android:layout_marginTop="125dp" />
+-->
+    <ListView
+        android:id="@+id/lv_video_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="125dp"
+        android:scrollbars="vertical">
 
+    </ListView>
 
 </android.support.constraint.ConstraintLayout>
