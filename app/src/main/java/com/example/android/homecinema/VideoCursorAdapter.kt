@@ -40,6 +40,7 @@ class VideoCursorAdapter(context: Context?, cursor: Cursor?) : CursorAdapter(con
             view?.findViewById<ImageView>(R.id.video_thumbnail)?.setImageBitmap(ThumbnailUtils.createVideoThumbnail(myVideoItem.path, 3))
         }
         view?.findViewById<TextView>(R.id.tv_video_name)?.text = myVideoItem.displayName
-        view?.findViewById<TextView>(R.id.video_duration)?.text = Time(myVideoItem.duration).toString()
+        val videoDuration = Time(myVideoItem.duration).toString()
+        view?.findViewById<TextView>(R.id.video_duration)?.text = videoDuration.drop(3)
     }
 }

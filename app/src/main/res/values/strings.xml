@@ -2,5 +2,7 @@
     <string name="app_name">HomeCinema</string>
 
     <string name="loader_text">Please wait…</string>
+    <!-- content descriptions -->
     <string name="video_thumbnail">Video thumbnail</string>
+
 </resources>

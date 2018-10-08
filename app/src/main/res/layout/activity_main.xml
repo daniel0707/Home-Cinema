@@ -13,65 +13,46 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        android:gravity="center"
         android:minHeight="?attr/actionBarSize"
         android:padding="1dp"
         app:subtitleTextColor="#f5fbff"
-        app:titleTextColor="#fff"
-        android:gravity="center">
+        app:titleTextColor="#fff">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_marginStart="50dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorText"
-        android:gravity="center"
-        android:textSize="20sp"
-        tools:text="Some title"
-        android:id="@+id/toolbar_text"
-        />
+        <TextView
+            android:id="@+id/toolbar_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:gravity="center"
+            android:textColor="@color/colorText"
+            android:textSize="20sp"
+            tools:text="Some title" />
     </android.support.v7.widget.Toolbar>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--
-        <Button
-            android:layout_marginTop="50dp"
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-            -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="75dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="75dp"
             android:layout_marginRight="16dp"
+            android:background="@drawable/headerbackground"
             android:gravity="center"
             android:text="Choose a video"
             android:textColor="@color/colorText"
-            android:background="@drawable/headerbackground"
             android:textSize="20sp" />
     </LinearLayout>
-<!-- changed to Linear Layout
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_video_list"
-        android:layout_width="match_parent"
-        android:scrollbars="vertical"
-        android:layout_height="match_parent"
-        android:layout_marginTop="125dp" />
--->
+
     <ListView
         android:id="@+id/lv_video_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="125dp"
-        android:scrollbars="vertical">
-
-    </ListView>
+        android:scrollbars="vertical"></ListView>
 
 </android.support.constraint.ConstraintLayout>
