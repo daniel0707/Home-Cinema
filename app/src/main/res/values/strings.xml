@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">HomeCinema</string>
-
     <string name="loader_text">Please wait…</string>
     <!-- content descriptions -->
     <string name="video_thumbnail">Video thumbnail</string>
@@ -22,6 +21,4 @@
     <string name="viewdescription">Type a preferred window size for the AR object that renders your videos into the camera view:</string>
     <string name="videolength">Video length</string>
     <string name="bluetoothdescription">Use the toggle button if you`d like to use a bluetooth device for audio streaming</string>
-
-
 </resources>

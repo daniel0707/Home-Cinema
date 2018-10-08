@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:contentDescription="@string/camera"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/my_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VideoActivity">
-
-    <fragment
-        android:name="com.google.ar.sceneform.ux.ArFragment"
+    android:fitsSystemWindows="true">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_layout"/>
-</FrameLayout>
+        android:orientation="vertical">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/settingsbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="?attr/colorPrimary"
+            android:contentDescription="@string/settingstoolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:padding="1dp"
+            android:elevation="100000dp"
+            >
+
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/backbutton"
+                android:src="@drawable/ic_outline_arrow_back_24px" />
+
+            <TextView
+                android:id="@+id/settingsbar_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:contentDescription="Settings"
+                android:gravity="center"
+                android:textColor="@color/colorText"
+                android:textSize="20sp"
+                android:text="Camera" />
+
+
+        </android.support.v7.widget.Toolbar>
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:contentDescription="@string/camera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".VideoActivity">
+
+            <fragment
+                android:name="com.google.ar.sceneform.ux.ArFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/fragment_layout"/>
+        </FrameLayout>
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>

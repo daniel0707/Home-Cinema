@@ -34,8 +34,7 @@
             android:contentDescription="Settings"
             android:gravity="center"
             android:textColor="@color/colorText"
-            android:textSize="20sp"
-            tools:text="Some title" />
+            android:textSize="20sp" />
 
 
     </android.support.v7.widget.Toolbar>

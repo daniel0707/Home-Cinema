@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i("DBG", "CLICKED")
                 val intent = Intent(applicationContext, SettingsActivity::class.java)
                 startActivity(intent)
-                overridePendingTransition(R.transition.slide_righttoleft, R.transition.hold)
+                overridePendingTransition(R.transition.slide_lefttoright, R.transition.hold)
 
                 return true
             }
@@ -168,6 +168,7 @@ class MainActivity : AppCompatActivity() {
                 myIntent.putExtra("videoParcel",myVideoItem)
 
                 startActivity(myIntent)
+                overridePendingTransition(R.transition.slide_lefttoright, R.transition.hold)
             }
         }
     }

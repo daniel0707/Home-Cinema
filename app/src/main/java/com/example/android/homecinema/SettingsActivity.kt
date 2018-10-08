@@ -36,7 +36,7 @@ class SettingsActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.transition.slide_lefttoright, R.transition.hold)
+            overridePendingTransition(R.transition.slide_righttoleft, R.transition.hold)
         }
 
         //Check if bluetooth is already on and change details text to On
