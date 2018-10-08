@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <android.support.v7.widget.Toolbar
+        android:contentDescription="@string/toolbar"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -20,6 +21,7 @@
         app:titleTextColor="#fff">
 
         <TextView
+            android:contentDescription="@string/applicationtitle"
             android:id="@+id/toolbar_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,6 +38,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:contentDescription="@string/choosevideo"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="16dp"
@@ -49,6 +52,7 @@
     </LinearLayout>
 
     <ListView
+        android:contentDescription="@string/videolist"
         android:id="@+id/lv_video_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

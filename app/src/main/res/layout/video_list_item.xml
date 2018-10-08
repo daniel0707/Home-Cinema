@@ -29,8 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="3"
+            android:contentDescription="@string/videoname"
             android:gravity="center"
-            android:text="lorem ipsum"
             android:textSize="15sp" />
 
         <TextView
@@ -38,11 +38,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:contentDescription="@string/videolength"
             android:gravity="center"
-            android:text="01:23"
             android:textSize="12sp" />
 
     </LinearLayout>
-
-
 </LinearLayout>

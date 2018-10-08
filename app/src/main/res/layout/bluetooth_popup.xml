@@ -7,6 +7,7 @@
     android:orientation="vertical">
     <!-- close popup-->
     <ImageView
+        android:contentDescription="@string/exit"
         android:id="@+id/bluetooth_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,6 +34,7 @@
             android:text="Tap to turn on Bluetooth" />
 
         <Switch
+            android:contentDescription="@string/bluebooth"
             android:layout_marginLeft="8dp"
             android:id="@+id/switch_button"
             android:layout_width="wrap_content"
@@ -41,10 +43,11 @@
     </LinearLayout>
 
     <TextView
+        android:contentDescription="@string/bluetoothdescription"
         android:layout_width="match_parent"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Use the toggle button if you'd like to use a bluetooth device for audio streaming" />
+        android:text="@string/bluetoothdescription" />
 </LinearLayout>

@@ -4,5 +4,24 @@
     <string name="loader_text">Please wait…</string>
     <!-- content descriptions -->
     <string name="video_thumbnail">Video thumbnail</string>
+    <string name="toolbar">Home page toolbar</string>
+    <string name="applicationtitle">HomeCinema</string>
+    <string name="choosevideo">Choose a video</string>
+    <string name="videolist">List of video files</string>
+    <string name="settingstoolbar">Settings page toolbar</string>
+    <string name="backbutton">Go back to home screen</string>
+    <string name="bluetoothsettings">Bluetooth settings</string>
+    <string name="viewsettings">View settings</string>
+    <string name="help">help</string>
+    <string name="camera">Video player</string>
+    <string name="exit">Exit view</string>
+    <string name="bluebooth">Turn on bluetooth</string>
+    <string name="videoname">Video file name</string>
+    <string name="viewheight">Video object height</string>
+    <string name="viewwidth">Video object width</string>
+    <string name="viewdescription">Type a preferred window size for the AR object that renders your videos into the camera view:</string>
+    <string name="videolength">Video length</string>
+    <string name="bluetoothdescription">Use the toggle button if you`d like to use a bluetooth device for audio streaming</string>
+
 
 </resources>

@@ -8,6 +8,7 @@
     android:padding="5dp">
     <!-- close popup-->
     <ImageView
+        android:contentDescription="@string/exit"
         android:id="@+id/view_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,11 +20,12 @@
         android:text="Close Me" />
 
     <TextView
+        android:contentDescription="@string/viewdescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:text="Type a preferred window size for the AR object that renders your videos into the camera view:" />
+        android:text="@string/viewdescription" />
 
     <EditText
         android:id="@+id/view_height"
