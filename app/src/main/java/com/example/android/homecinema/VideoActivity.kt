@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.Menu
+import android.view.View
 import android.widget.Toast
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.Node
@@ -17,7 +18,7 @@ import com.google.ar.sceneform.rendering.ExternalTexture
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.BaseArFragment
-import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.activity_video.*
 
 class VideoActivity : AppCompatActivity() {
 
@@ -30,9 +31,13 @@ class VideoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
-        setSupportActionBar(settingsbar)
 
-        backButton.setOnClickListener {
+        setSupportActionBar(camerabar)
+
+        //set palybutton invisible
+        playbutton.hide()
+
+        camerabackButton.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.transition.slide_righttoleft, R.transition.hold)
@@ -101,6 +106,8 @@ class VideoActivity : AppCompatActivity() {
                     }
                     if (!mediaPlayer.isPlaying) {
                         mediaPlayer.start()
+                        playbutton.setImageResource(android.R.drawable.ic_media_pause)
+                        playbutton.show()
                         texture.surfaceTexture.setOnFrameAvailableListener { _ ->
                             videoNode.renderable = videoRenderable
                             texture.surfaceTexture.setOnFrameAvailableListener(null)
@@ -113,11 +120,15 @@ class VideoActivity : AppCompatActivity() {
 
                 }
         )
+        //Play/Pause button
+        playbutton.setOnClickListener {
+            toggleVideoPlayPause()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Set toolbar title
-        settingsbar_text.text = "Camera"
+        camerabar_text.text = "Camera"
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -127,6 +138,7 @@ class VideoActivity : AppCompatActivity() {
             mediaPlayer.release()
         }
     }
+
     override fun onDestroy() {
         super.onDestroy()
 
@@ -135,11 +147,22 @@ class VideoActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchSharedPreferences(){
-        val sharedPref = this.getSharedPreferences(getString(R.string.shared_preference_key),Context.MODE_PRIVATE)?: return
-        val defaultHeight = resources.getInteger(R.integer.default_height)
-        val defaultWidth = resources.getInteger(R.integer.default_width)
-        customHeight = sharedPref.getInt(getString(R.string.height_preference_key), defaultHeight)
-        customWidth = sharedPref.getInt(getString(R.string.width_preference_key), defaultWidth)
+
+    private fun fetchSharedPreferences() {
+                    val sharedPref = this.getSharedPreferences(getString(R.string.shared_preference_key), Context.MODE_PRIVATE) ?: return
+                    val defaultHeight = resources.getInteger(R.integer.default_height)
+                    val defaultWidth = resources.getInteger(R.integer.default_width)
+                    customHeight = sharedPref.getInt(getString(R.string.height_preference_key), defaultHeight)
+                    customWidth = sharedPref.getInt(getString(R.string.width_preference_key), defaultWidth)
+                }
+    fun toggleVideoPlayPause() {
+        //toggles play & pause on clicks
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            playbutton.setImageResource(android.R.drawable.ic_media_play)
+        } else {
+            mediaPlayer.start();
+            playbutton.setImageResource(android.R.drawable.ic_media_pause)
+        }
     }
 }

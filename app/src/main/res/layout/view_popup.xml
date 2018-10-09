@@ -6,27 +6,30 @@
     android:background="@drawable/back"
     android:orientation="vertical"
     android:padding="5dp">
+
     <!-- close popup-->
     <ImageView
-        android:contentDescription="@string/exit"
         android:id="@+id/view_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginTop="3dp"
-        android:layout_marginRight="3dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="-5dp"
         android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/exit"
+        android:padding="10dp"
         android:src="@drawable/ic_outline_close_24px"
         android:text="Close Me" />
 
     <TextView
-        android:contentDescription="@string/viewdescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
+        android:contentDescription="@string/viewdescription"
         android:text="@string/viewdescription" />
 
+    <!-- Edit Height -->
     <EditText
         android:id="@+id/view_height"
         android:layout_width="match_parent"
@@ -36,6 +39,7 @@
         android:inputType="number"
         android:textColor="#777" />
 
+    <!-- Edit Width -->
     <EditText
         android:id="@+id/view_width"
         android:layout_width="match_parent"
@@ -44,6 +48,7 @@
         android:inputType="number"
         android:textColor="#777" />
 
+    <!-- Current Size -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,28 +60,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Current object size: "
-            android:textColor="#777" />
+            android:layout_marginStart="5dp"
+            android:text="*Current object size: " />
 
         <TextView
             android:id="@+id/customDimensionWidth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_weight="1"
-            android:text="192" />
+            android:text="192"
+            android:textColor="#FFF" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="x" />
+            android:text="x"
+            android:textColor="#FFF" />
+
         <TextView
             android:id="@+id/customDimensionHeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="108" />
-
+            android:layout_weight="1"
+            android:text="108"
+            android:textColor="#FFF" />
 
     </LinearLayout>
 </LinearLayout>

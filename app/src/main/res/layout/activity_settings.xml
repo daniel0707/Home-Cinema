@@ -21,6 +21,9 @@
 
         <ImageView
             android:id="@+id/backButton"
+            android:paddingRight="24dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/backbutton"
@@ -30,7 +33,7 @@
             android:id="@+id/settingsbar_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="52dp"
             android:contentDescription="Settings"
             android:gravity="center"
             android:textColor="@color/colorText"
@@ -39,17 +42,21 @@
 
     </android.support.v7.widget.Toolbar>
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
 
+
+
         <!-- Bluetooth button -->
         <RelativeLayout
             android:id="@+id/bluetoothButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
@@ -102,7 +109,7 @@
             android:contentDescription="@string/viewsettings"
             android:id="@+id/viewButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
@@ -142,7 +149,7 @@
             android:contentDescription="@string/help"
             android:id="@+id/helpButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"

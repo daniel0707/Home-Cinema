@@ -20,6 +20,7 @@
     <string name="viewwidth">Video object width</string>
     <string name="viewdescription">Type a preferred window size for the AR object that renders your videos into the camera view:</string>
     <string name="videolength">Video length</string>
+    <string name="playpausebutton">Play and Pause button</string>
     <string name="bluetoothdescription">Use the toggle button if you`d like to use a bluetooth device for audio streaming</string>
     <!-- shared preference resources -->
     <string name="shared_preference_key">com.example.android.homecinema.sharedpreference</string>
