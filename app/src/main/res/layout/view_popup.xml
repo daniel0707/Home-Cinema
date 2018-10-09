@@ -57,24 +57,24 @@
             android:textColor="#777" />
 
         <TextView
-            android:id="@+id/customDimensionHeight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="100" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="x" />
-
-        <TextView
             android:id="@+id/customDimensionWidth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_weight="1"
-            android:text="100" />
+            android:text="192" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="x" />
+        <TextView
+            android:id="@+id/customDimensionHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="108" />
+
+
     </LinearLayout>
 </LinearLayout>

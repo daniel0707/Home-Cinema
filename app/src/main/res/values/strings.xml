@@ -3,4 +3,7 @@
 
     <string name="loader_text">Please wait…</string>
     <string name="video_thumbnail">Video thumbnail</string>
+    
+    <string name="height_preference_key">com.example.android.homecinema.height</string>
+    <string name="width_preference_key">com.example.android.homecinema.width</string>
 </resources>

@@ -1,13 +1,16 @@
 package com.example.android.homecinema
 
+import android.content.Context
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.Node
+import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ExternalTexture
 import com.google.ar.sceneform.rendering.ModelRenderable
@@ -22,12 +25,15 @@ class VideoActivity : AppCompatActivity(){
     private lateinit var videoRenderable: ModelRenderable
     private lateinit var mediaPlayer: MediaPlayer
 
-// replace this later with settings value
-    private val VIDEO_HEIGHT_METERS = 1f
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
+
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
+        val defaultHeight = resources.getInteger(R.integer.default_height)
+        val defaultWidth = resources.getInteger(R.integer.default_width)
+        val customHeight = sharedPref.getInt(getString(R.string.height_preference_key), defaultHeight)
+        val customWidth = sharedPref.getInt(getString(R.string.width_preference_key), defaultWidth)
 
         val videoItem = intent.getParcelableExtra<VideoItem>("videoParcel")
 
@@ -64,15 +70,15 @@ class VideoActivity : AppCompatActivity(){
 
                     val videoNode = Node()
                     videoNode.setParent(anchorNode)
-                    videoNode.setLookDirection(videoNode.up)
-
+                    videoNode.setLookDirection(Quaternion.rotateVector(Quaternion(0.7071f,0.7071f,0f,0f),videoNode.up))
+                    //videoNode.localRotation = Quaternion.axisAngle(videoNode.up,90f)
 
                     val videoWidth  = mediaPlayer.videoWidth.toFloat()
                     val videoHeight = mediaPlayer.videoHeight.toFloat()
                     if(videoHeight<videoWidth){
-                        videoNode.localScale = Vector3(VIDEO_HEIGHT_METERS * (videoWidth / videoHeight), VIDEO_HEIGHT_METERS, 1.0f)
+                        videoNode.localScale = Vector3(customWidth.toFloat()/100, customHeight.toFloat()/100, 1.0f)
                     }else{
-                        videoNode.localScale = Vector3(VIDEO_HEIGHT_METERS,VIDEO_HEIGHT_METERS * (videoWidth / videoHeight), 1.0f)
+                        videoNode.localScale = Vector3(customHeight.toFloat()/100,customWidth.toFloat()/100, 1.0f)
                     }
 
                     if(!mediaPlayer.isPlaying){
