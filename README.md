@@ -34,4 +34,5 @@ Programming languages used:
 * **Joonas Leonsaari**
 * **Daniel Vahla**
 
-#Link to Project flow & management ![Trello](https://trello.com/b/QI9bpBYC/home-cinema)
+##Link to Project flow & management:
+[Trello](https://trello.com/b/QI9bpBYC/home-cinema)
