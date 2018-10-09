@@ -1,61 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/my_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <android.support.v7.widget.Toolbar
-            android:id="@+id/settingsbar"
+            android:id="@+id/camerabar"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="?attr/colorPrimary"
             android:contentDescription="@string/settingstoolbar"
-            android:minHeight="?attr/actionBarSize"
-            android:padding="1dp"
             android:elevation="100000dp"
-            >
+            android:minHeight="?attr/actionBarSize"
+            android:padding="1dp">
 
             <ImageView
-                android:paddingRight="24dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:id="@+id/backButton"
+                android:id="@+id/camerabackButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/backbutton"
+                android:paddingTop="12dp"
+                android:paddingRight="24dp"
+                android:paddingBottom="12dp"
                 android:src="@drawable/ic_outline_arrow_back_24px" />
 
             <TextView
-                android:id="@+id/settingsbar_text"
+                android:id="@+id/camerabar_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="50dp"
                 android:contentDescription="Settings"
                 android:gravity="center"
+                android:text="Camera"
                 android:textColor="@color/colorText"
-                android:textSize="20sp"
-                android:text="Camera" />
+                android:textSize="20sp" />
 
 
         </android.support.v7.widget.Toolbar>
 
+
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
-            android:contentDescription="@string/camera"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/camera"
             tools:context=".VideoActivity">
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/playbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_margin="16dp"
+                android:backgroundTint="@color/colorAccent"
+                android:clickable="true"
+                android:contentDescription="@string/playpausebutton"
+                android:focusable="true"
+ />
+
             <fragment
+                android:id="@+id/fragment_layout"
                 android:name="com.google.ar.sceneform.ux.ArFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/fragment_layout"/>
+                android:layout_height="match_parent" />
         </FrameLayout>
     </LinearLayout>
 
