@@ -1,6 +1,6 @@
 # HomeCinema
 
-![HomeCinema](https://media.giphy.com/media/1dMPO7edhU6wTE2N9u/giphy.gif)
+![HomeCinema](https://media.giphy.com/media/2sfGmZ94ZNrUVlJBNr/giphy.gif)
 
 A school project of an android application meant for watching any video files at home. Pick a video file and the application renders an AR object to your phone's camera view and you can experience a cinema-like experience right at home!
 
@@ -33,3 +33,5 @@ Programming languages used:
 
 * **Joonas Leonsaari**
 * **Daniel Vahla**
+
+#Link to Project flow & management ![Trello](https://trello.com/b/QI9bpBYC/home-cinema)
