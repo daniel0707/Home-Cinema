@@ -3,6 +3,9 @@
     <string name="loader_text">Please wait…</string>
     <!-- content descriptions -->
     <string name="video_thumbnail">Video thumbnail</string>
+
+    <string name="height_preference_key">com.example.android.homecinema.height</string>
+    <string name="width_preference_key">com.example.android.homecinema.width</string>
     <string name="toolbar">Home page toolbar</string>
     <string name="applicationtitle">HomeCinema</string>
     <string name="choosevideo">Choose a video</string>

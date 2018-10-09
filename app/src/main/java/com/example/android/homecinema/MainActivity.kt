@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         // Handle presses on the action bar menu item
         when (item.itemId) {
             R.id.action_settings -> {
-                Log.i("DBG", "CLICKED")
                 val intent = Intent(applicationContext, SettingsActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(R.transition.slide_lefttoright, R.transition.hold)
@@ -163,7 +162,6 @@ class MainActivity : AppCompatActivity() {
                         finalCursor.getString(finalCursor.getColumnIndex(MediaStore.Video.Media.WIDTH)),
                         finalCursor.getString(finalCursor.getColumnIndex(MediaStore.Video.Thumbnails.DATA))
                 )
-                Log.d("ERRORTAG",myVideoItem.displayName)
                 val myIntent = Intent(this,VideoActivity::class.java)
                 myIntent.putExtra("videoParcel",myVideoItem)
 

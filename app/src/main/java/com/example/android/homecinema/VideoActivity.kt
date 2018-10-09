@@ -1,18 +1,22 @@
 package com.example.android.homecinema
 
+import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.widget.Toast
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.Node
+import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ExternalTexture
 import com.google.ar.sceneform.rendering.ModelRenderable
+import com.google.ar.sceneform.rendering.PlaneRenderer
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.BaseArFragment
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -25,13 +29,15 @@ class VideoActivity : AppCompatActivity() {
     private lateinit var videoRenderable: ModelRenderable
     private lateinit var mediaPlayer: MediaPlayer
 
-    // replace this later with settings value
-    private val VIDEO_HEIGHT_METERS = 1f
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
 
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
+        val defaultHeight = resources.getInteger(R.integer.default_height)
+        val defaultWidth = resources.getInteger(R.integer.default_width)
+        val customHeight = sharedPref.getInt(getString(R.string.height_preference_key), defaultHeight)
+        val customWidth = sharedPref.getInt(getString(R.string.width_preference_key), defaultWidth)
         setSupportActionBar(settingsbar)
 
         backButton.setOnClickListener {
@@ -81,10 +87,13 @@ class VideoActivity : AppCompatActivity() {
 
                     val videoWidth = mediaPlayer.videoWidth.toFloat()
                     val videoHeight = mediaPlayer.videoHeight.toFloat()
-                    if (videoHeight < videoWidth) {
-                        videoNode.localScale = Vector3(VIDEO_HEIGHT_METERS * (videoWidth / videoHeight), VIDEO_HEIGHT_METERS, 1.0f)
-                    } else {
-                        videoNode.localScale = Vector3(VIDEO_HEIGHT_METERS, VIDEO_HEIGHT_METERS * (videoWidth / videoHeight), 1.0f)
+                    if(videoHeight<videoWidth){
+                        videoNode.localScale = Vector3(customWidth.toFloat()/100, customHeight.toFloat()/100, 1.0f)
+                        videoNode.localPosition = Vector3(0f,0f,0f - customHeight.toFloat()/200f)
+                    }else{
+                        videoNode.localScale = Vector3(customHeight.toFloat()/100,customWidth.toFloat()/100, 1.0f)
+                        videoNode.localRotation= Quaternion.multiply(videoNode.localRotation,Quaternion.axisAngle(Vector3(0f,0f,1f),90f))
+                        videoNode.localPosition = Vector3(0f,0f,0f - customWidth.toFloat()/200f)
                     }
 
                     if (!mediaPlayer.isPlaying) {
@@ -96,6 +105,7 @@ class VideoActivity : AppCompatActivity() {
                     } else {
                         videoNode.renderable = videoRenderable
                     }
+
                 }
         )
     }
@@ -106,6 +116,12 @@ class VideoActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onPause() {
+        super.onPause()
+        if (mediaPlayer != null) {
+            mediaPlayer.release()
+        }
+    }
     override fun onDestroy() {
         super.onDestroy()
 

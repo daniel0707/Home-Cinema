@@ -10,21 +10,20 @@ import android.text.TextWatcher
 import android.transition.Slide
 import android.transition.TransitionManager
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.Menu
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_settings.*
-import java.lang.Compiler.disable
 import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothProfile
-import kotlinx.android.synthetic.main.bluetooth_popup.*
+import android.util.Log
 
 
 class SettingsActivity : AppCompatActivity() {
 
+    lateinit var customHeight : Any
+    lateinit var customWidth : Any
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -32,6 +31,18 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         setSupportActionBar(settingsbar)
+
+        //initial text value setup
+        fetchPreferences()
+
+        val inflater : LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.view_popup,null)
+        val customDimensionsHeight = view.findViewById<TextView>(R.id.customDimensionHeight)
+        val customDimensionsWidth = view.findViewById<TextView>(R.id.customDimensionWidth)
+        customDimensionsHeight.text = customHeight.toString()
+        customDimensionsWidth.text = customWidth.toString()
+        view_details.text = "$customWidth x $customHeight"
+
 
         backButton.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
@@ -162,6 +173,11 @@ class SettingsActivity : AppCompatActivity() {
         // Inflate a custom view using layout inflater
         val view = inflater.inflate(R.layout.view_popup, null)
 
+        fetchPreferences()
+
+        view.findViewById<TextView>(R.id.customDimensionHeight).text = customHeight.toString()
+        view.findViewById<TextView>(R.id.customDimensionWidth).text = customWidth.toString()
+
         //Get screen size
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
@@ -193,7 +209,14 @@ class SettingsActivity : AppCompatActivity() {
             val customDimensionsHeight = view.findViewById<TextView>(R.id.customDimensionHeight).text
             val customDimensionsWidth = view.findViewById<TextView>(R.id.customDimensionWidth).text
 
-            view_details.text = "$customDimensionsHeight" + "x" + "$customDimensionsWidth"
+            val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+            with (sharedPref.edit()) {
+                putInt(getString(R.string.width_preference_key), customDimensionsWidth.toString().toInt())
+                putInt(getString(R.string.height_preference_key), customDimensionsHeight.toString().toInt())
+                commit()
+            }
+
+            view_details.text = "$customDimensionsWidth x $customDimensionsHeight"
         }
 
         // Finally, show the popup window on app
@@ -221,7 +244,8 @@ class SettingsActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence, start: Int,
                                        before: Int, count: Int) {
                 val customDimensionsHeight = view.findViewById<TextView>(R.id.customDimensionHeight)
-                customDimensionsHeight.setText(s)
+                customDimensionsHeight.text = s
+
             }
         })
 
@@ -237,7 +261,7 @@ class SettingsActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence, start: Int,
                                        before: Int, count: Int) {
                 val customDimensionsWidth = view.findViewById<TextView>(R.id.customDimensionWidth)
-                customDimensionsWidth.setText(s)
+                customDimensionsWidth.text = s
             }
         })
     }
@@ -284,6 +308,14 @@ class SettingsActivity : AppCompatActivity() {
                 0, // X offset
                 0 // Y offset
         )
+    }
+
+    private fun fetchPreferences(){
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
+        val defaultHeight = resources.getInteger(R.integer.default_height)
+        val defaultWidth = resources.getInteger(R.integer.default_width)
+        customHeight = sharedPref.getInt(getString(R.string.height_preference_key), defaultHeight)
+        customWidth = sharedPref.getInt(getString(R.string.width_preference_key), defaultWidth)
     }
 
 }
