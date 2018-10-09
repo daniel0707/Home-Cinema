@@ -84,8 +84,7 @@ class VideoActivity : AppCompatActivity() {
 
                     val videoNode = Node()
                     videoNode.setParent(anchorNode)
-                    videoNode.setLookDirection(Quaternion.rotateVector(Quaternion(0.7071f,0.7071f,0f,0f),videoNode.up))
-                    //videoNode.localRotation = Quaternion.axisAngle(videoNode.up,90f)
+                    videoNode.setLookDirection(videoNode.up)
 
                     val videoWidth = mediaPlayer.videoWidth.toFloat()
                     val videoHeight = mediaPlayer.videoHeight.toFloat()
@@ -93,6 +92,7 @@ class VideoActivity : AppCompatActivity() {
                         videoNode.localScale = Vector3(customWidth.toFloat()/100, customHeight.toFloat()/100, 1.0f)
                     }else{
                         videoNode.localScale = Vector3(customHeight.toFloat()/100,customWidth.toFloat()/100, 1.0f)
+                        videoNode.localRotation= Quaternion.multiply(videoNode.localRotation,Quaternion.axisAngle(Vector3(0f,0f,1f),90f))
                     }
 
                     if (!mediaPlayer.isPlaying) {
