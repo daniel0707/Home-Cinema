@@ -16,6 +16,7 @@ import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ExternalTexture
 import com.google.ar.sceneform.rendering.ModelRenderable
+import com.google.ar.sceneform.rendering.PlaneRenderer
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.BaseArFragment
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -27,9 +28,6 @@ class VideoActivity : AppCompatActivity() {
     private lateinit var arFragment: ArFragment
     private lateinit var videoRenderable: ModelRenderable
     private lateinit var mediaPlayer: MediaPlayer
-
-    // replace this later with settings value
-    private val VIDEO_HEIGHT_METERS = 1f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,13 +84,16 @@ class VideoActivity : AppCompatActivity() {
                     videoNode.setParent(anchorNode)
                     videoNode.setLookDirection(videoNode.up)
 
+
                     val videoWidth = mediaPlayer.videoWidth.toFloat()
                     val videoHeight = mediaPlayer.videoHeight.toFloat()
                     if(videoHeight<videoWidth){
                         videoNode.localScale = Vector3(customWidth.toFloat()/100, customHeight.toFloat()/100, 1.0f)
+                        videoNode.localPosition = Vector3(0f,0f,0f - customHeight.toFloat()/200f)
                     }else{
                         videoNode.localScale = Vector3(customHeight.toFloat()/100,customWidth.toFloat()/100, 1.0f)
                         videoNode.localRotation= Quaternion.multiply(videoNode.localRotation,Quaternion.axisAngle(Vector3(0f,0f,1f),90f))
+                        videoNode.localPosition = Vector3(0f,0f,0f - customWidth.toFloat()/200f)
                     }
 
                     if (!mediaPlayer.isPlaying) {
@@ -104,6 +105,7 @@ class VideoActivity : AppCompatActivity() {
                     } else {
                         videoNode.renderable = videoRenderable
                     }
+
                 }
         )
     }
@@ -114,6 +116,12 @@ class VideoActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onPause() {
+        super.onPause()
+        if (mediaPlayer != null) {
+            mediaPlayer.release()
+        }
+    }
     override fun onDestroy() {
         super.onDestroy()
 
