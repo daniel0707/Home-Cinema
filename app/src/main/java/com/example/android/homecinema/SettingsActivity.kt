@@ -47,7 +47,7 @@ class SettingsActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.transition.slide_lefttoright, R.transition.hold)
+            overridePendingTransition(R.transition.slide_righttoleft, R.transition.hold)
         }
 
         //Check if bluetooth is already on and change details text to On
@@ -105,8 +105,6 @@ class SettingsActivity : AppCompatActivity() {
                 view, // Custom view to show in popup window, set popup size
                 width - 50, 1000
         )
-        //make window closeable if user clicks outside of it
-        popupWindow.isOutsideTouchable = true
         // If API level 23 or higher then execute the code
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // Create a new slide animation for popup window enter transition
@@ -126,9 +124,10 @@ class SettingsActivity : AppCompatActivity() {
             // Dismiss the popup window & check bluetooth connection state
             if(mBluetoothAdapter.getProfileConnectionState(BluetoothProfile.A2DP) == BluetoothAdapter.STATE_CONNECTED) {
                 bluetoothconnection_details.text = "Connected"
+            } else if (bluetooth_details.text != "Off"){
+                bluetoothconnection_details.text = "Disconnected"
             }
             popupWindow.dismiss()
-
         }
 
 
@@ -190,7 +189,6 @@ class SettingsActivity : AppCompatActivity() {
                 width - 50, 1000
         )
         popupWindow.isFocusable = true
-        popupWindow.isOutsideTouchable = true
         popupWindow.update()
 
 
@@ -286,7 +284,6 @@ class SettingsActivity : AppCompatActivity() {
                 width - 50, 1000
         )
 
-        popupWindow.isOutsideTouchable = true
         // If API level 23 or higher then execute the code
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // Create a new slide animation for popup window enter transition

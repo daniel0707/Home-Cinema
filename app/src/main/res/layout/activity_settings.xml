@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorPrimary"
+        android:contentDescription="@string/settingstoolbar"
         android:minHeight="?attr/actionBarSize"
         android:padding="1dp"
         app:subtitleTextColor="#f5fbff"
@@ -22,17 +23,18 @@
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/backbutton"
             android:src="@drawable/ic_outline_arrow_back_24px" />
 
         <TextView
             android:id="@+id/settingsbar_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
+            android:layout_marginEnd="50dp"
+            android:contentDescription="Settings"
             android:gravity="center"
             android:textColor="@color/colorText"
-            android:textSize="20sp"
-            tools:text="Some title" />
+            android:textSize="20sp" />
 
 
     </android.support.v7.widget.Toolbar>
@@ -52,6 +54,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
             android:background="@drawable/back"
+            android:contentDescription="@string/bluetoothsettings"
             android:orientation="horizontal"
             android:padding="8dp">
 
@@ -70,28 +73,33 @@
                 android:text="Bluetooth"
                 android:textColor="@color/colorText"
                 android:textSize="20sp" />
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
-    android:layout_centerVertical="true"
-    android:orientation="horizontal">
-            <TextView
-                android:id="@+id/bluetooth_details"
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Off"
-                android:textSize="12sp" />
-            <TextView
-                android:id="@+id/bluetoothconnection_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp" />
-</LinearLayout>
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="bluetooth connection indicator"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/bluetooth_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Off"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/bluetoothconnection_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </RelativeLayout>
 
         <!-- View button -->
         <RelativeLayout
+            android:contentDescription="@string/viewsettings"
             android:id="@+id/viewButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,6 +127,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:contentDescription="view size"
                 android:id="@+id/view_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,6 +139,7 @@
 
         <!-- HelpButton -->
         <RelativeLayout
+            android:contentDescription="@string/help"
             android:id="@+id/helpButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
