@@ -6,7 +6,6 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.widget.Toast
@@ -16,28 +15,21 @@ import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ExternalTexture
 import com.google.ar.sceneform.rendering.ModelRenderable
-import com.google.ar.sceneform.rendering.PlaneRenderer
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.BaseArFragment
 import kotlinx.android.synthetic.main.activity_settings.*
 
-
-//this activity should receive settings for Size of screen from somewhere
 class VideoActivity : AppCompatActivity() {
 
     private lateinit var arFragment: ArFragment
     private lateinit var videoRenderable: ModelRenderable
     private lateinit var mediaPlayer: MediaPlayer
+    lateinit var customHeight : Any
+    lateinit var customWidth : Any
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
-
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
-        val defaultHeight = resources.getInteger(R.integer.default_height)
-        val defaultWidth = resources.getInteger(R.integer.default_width)
-        val customHeight = sharedPref.getInt(getString(R.string.height_preference_key), defaultHeight)
-        val customWidth = sharedPref.getInt(getString(R.string.width_preference_key), defaultWidth)
         setSupportActionBar(settingsbar)
 
         backButton.setOnClickListener {
@@ -46,14 +38,13 @@ class VideoActivity : AppCompatActivity() {
             overridePendingTransition(R.transition.slide_righttoleft, R.transition.hold)
         }
 
-        val videoItem = intent.getParcelableExtra<VideoItem>("videoParcel")
 
         arFragment = supportFragmentManager.findFragmentById(R.id.fragment_layout) as ArFragment
 
-        var texture = ExternalTexture()
-
+        val videoItem = intent.getParcelableExtra<VideoItem>("videoParcel")
         val videoURI = Uri.parse(videoItem.path)
 
+        val texture = ExternalTexture()
         mediaPlayer = MediaPlayer.create(this, videoURI)
         mediaPlayer.setSurface(texture.surface)
 
@@ -74,8 +65,15 @@ class VideoActivity : AppCompatActivity() {
         arFragment.setOnTapArPlaneListener(
                 BaseArFragment.OnTapArPlaneListener { hitResult, _, _ ->
                     if (videoRenderable == null) {
+                        //protects app from crashing on failing to load video
                         return@OnTapArPlaneListener
                     }
+
+                    //set up data from sharedpreferences
+                    fetchSharedPreferences()
+
+                    arFragment.arSceneView.planeRenderer.isVisible = false
+
                     val anchor = hitResult.createAnchor()
                     val anchorNode = AnchorNode(anchor)
                     anchorNode.setParent(arFragment.arSceneView.scene)
@@ -87,15 +85,20 @@ class VideoActivity : AppCompatActivity() {
 
                     val videoWidth = mediaPlayer.videoWidth.toFloat()
                     val videoHeight = mediaPlayer.videoHeight.toFloat()
-                    if(videoHeight<videoWidth){
-                        videoNode.localScale = Vector3(customWidth.toFloat()/100, customHeight.toFloat()/100, 1.0f)
-                        videoNode.localPosition = Vector3(0f,0f,0f - customHeight.toFloat()/200f)
-                    }else{
-                        videoNode.localScale = Vector3(customHeight.toFloat()/100,customWidth.toFloat()/100, 1.0f)
-                        videoNode.localRotation= Quaternion.multiply(videoNode.localRotation,Quaternion.axisAngle(Vector3(0f,0f,1f),90f))
-                        videoNode.localPosition = Vector3(0f,0f,0f - customWidth.toFloat()/200f)
-                    }
 
+                    if(videoHeight<videoWidth){
+                        //width,height,depth = 1
+                        videoNode.localScale = Vector3((customWidth as Int)/100f, (customHeight as Int).toFloat()/100f, 1.0f)
+                        //center video in hitresult
+                        videoNode.localPosition = Quaternion.rotateVector(videoNode.localRotation,Vector3(0f,0f - (customHeight as Int).toFloat()/200f,0f))
+                    }else {
+                        //height,width,depth = 1
+                        videoNode.localScale = Vector3((customWidth as Int).toFloat() / 100f, (customHeight as Int).toFloat() / 100f, 1.0f)
+                        //compensate for video being vertical
+                        videoNode.localRotation = Quaternion.multiply(videoNode.localRotation, Quaternion.axisAngle(Vector3(0f, 0f, 1f), 90f))
+                        //center video in hitresult
+                        videoNode.localPosition = Quaternion.rotateVector(videoNode.localRotation, Vector3(0f, 0f - (customHeight as Int).toFloat() / 200f, 0f))
+                    }
                     if (!mediaPlayer.isPlaying) {
                         mediaPlayer.start()
                         texture.surfaceTexture.setOnFrameAvailableListener { _ ->
@@ -105,6 +108,8 @@ class VideoActivity : AppCompatActivity() {
                     } else {
                         videoNode.renderable = videoRenderable
                     }
+                    //Disable listener to prevent multiple instances of media view
+                    arFragment.setOnTapArPlaneListener(null)
 
                 }
         )
@@ -128,5 +133,13 @@ class VideoActivity : AppCompatActivity() {
         if (mediaPlayer != null) {
             mediaPlayer.release()
         }
+    }
+
+    private fun fetchSharedPreferences(){
+        val sharedPref = this.getSharedPreferences(getString(R.string.shared_preference_key),Context.MODE_PRIVATE)?: return
+        val defaultHeight = resources.getInteger(R.integer.default_height)
+        val defaultWidth = resources.getInteger(R.integer.default_width)
+        customHeight = sharedPref.getInt(getString(R.string.height_preference_key), defaultHeight)
+        customWidth = sharedPref.getInt(getString(R.string.width_preference_key), defaultWidth)
     }
 }

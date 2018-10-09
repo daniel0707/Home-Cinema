@@ -209,7 +209,7 @@ class SettingsActivity : AppCompatActivity() {
             val customDimensionsHeight = view.findViewById<TextView>(R.id.customDimensionHeight).text
             val customDimensionsWidth = view.findViewById<TextView>(R.id.customDimensionWidth).text
 
-            val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+            val sharedPref = this.getSharedPreferences(getString(R.string.shared_preference_key),Context.MODE_PRIVATE)
             with (sharedPref.edit()) {
                 putInt(getString(R.string.width_preference_key), customDimensionsWidth.toString().toInt())
                 putInt(getString(R.string.height_preference_key), customDimensionsHeight.toString().toInt())
@@ -311,7 +311,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun fetchPreferences(){
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
+        val sharedPref = this.getSharedPreferences(getString(R.string.shared_preference_key),Context.MODE_PRIVATE)?: return
         val defaultHeight = resources.getInteger(R.integer.default_height)
         val defaultWidth = resources.getInteger(R.integer.default_width)
         customHeight = sharedPref.getInt(getString(R.string.height_preference_key), defaultHeight)
