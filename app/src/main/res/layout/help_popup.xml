@@ -20,10 +20,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="3dp"
-            android:layout_marginRight="3dp"
+            android:layout_marginEnd="3dp"
             android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_outline_close_24px"
-            android:text="Close Me" />
+            android:text="@string/close_me" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,24 +31,24 @@
             android:layout_gravity="start"
             android:layout_marginTop="-22dp"
             android:layout_marginBottom="50dp"
-            android:text="This application was created as a school project." />
+            android:text="@string/about" />
 
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The application can be used for playing a video file from your phone on the application's AR camera! To play a file, simply choose one from the scrollable list and the application will take care of the rest!" />
+        android:text="@string/about_help" />
     <TextView
         android:id="@+id/TextView1"
         android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Find more information at: " />
+        android:text="@string/about_extra" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:autoLink="web"
-        android:text="https://github.com/daniel0707/Home-Cinema/blob/master/README.md" />
+        android:text="@string/github_readme" />
 </LinearLayout>
