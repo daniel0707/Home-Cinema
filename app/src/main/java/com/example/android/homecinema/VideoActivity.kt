@@ -135,6 +135,9 @@ class VideoActivity : AppCompatActivity() {
                     //Disable listener to prevent multiple instances of media view
                     arFragment.setOnTapArPlaneListener(null)
 
+                    mediaPlayer.setOnCompletionListener {
+                        playbutton.setImageResource(android.R.drawable.ic_media_play)
+                    }
                 }
         )
         //Play/Pause button
