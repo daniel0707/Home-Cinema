@@ -26,4 +26,11 @@
     <string name="shared_preference_key">com.example.android.homecinema.sharedpreference</string>
     <string name="height_preference_key">com.example.android.homecinema.height</string>
     <string name="width_preference_key">com.example.android.homecinema.width</string>
+    <string name="camerabar">Camera</string>
+    <string name="toolbar_text">HomeCinema</string>
+    <string name="Bluetooth_On">On |</string>
+    <string name="Bluetooth_connected">Connected</string>
+    <string name="Bluetooth_disconnected">Disconnected</string>
+    <string name="settingsbar_text">Settings</string>
+    <string name="Bluetooth_off">Off</string>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Parcelable
 
 data class VideoItem(val ID: Long, val displayName: String, val duration: Long, val path: String,
                      val videoHeight: String, val videoWidth : String,val thumbnailPath : String?) : Parcelable {
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     constructor(parcel: Parcel) : this(
             parcel.readLong(),
             parcel.readString(),

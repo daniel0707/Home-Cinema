@@ -4,10 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import android.transition.Fade
-import android.transition.TransitionManager
-import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 
 class SplashActivity : AppCompatActivity() {
     private var mDelayHandler: Handler? = null

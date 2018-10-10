@@ -1,25 +1,18 @@
 package com.example.android.homecinema
 
-
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.CursorJoiner
 import android.database.MatrixCursor
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcelable
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 import android.transition.Fade
 import android.transition.TransitionManager
-import android.util.Log
 import android.view.*
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
-
-
 
 class MainActivity : AppCompatActivity() {
     private var permissionGranted = false
@@ -30,11 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         checkPermissions()
         setupListView(permissionGranted)
-        //Deprecated for ListView instead
-        /*
-        rv_video_list.layoutManager = LinearLayoutManager(this)
-        rv_video_list.adapter = VideoAdapter(videos, this)
-        */
+
         // Set the toolbar as support action bar
         setSupportActionBar(toolbar)
 
@@ -50,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         val inflater = menuInflater
         inflater.inflate(R.menu.homecinemamenu, menu)
         // Set toolbar title
-        toolbar_text.text = "HomeCinema"
+        toolbar_text.text = getString(R.string.toolbar_text)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -61,7 +50,6 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(applicationContext, SettingsActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(R.transition.slide_lefttoright, R.transition.hold)
-
                 return true
             }
         }
@@ -69,13 +57,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-
+        super.onStart()
         val mRootView: ViewGroup = findViewById(R.id.homeScreen)
         val mFade = Fade(Fade.IN)
         TransitionManager.beginDelayedTransition(mRootView, mFade)
-
-        super.onStart()
     }
+
     private fun checkPermissions(){
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -95,6 +82,7 @@ class MainActivity : AppCompatActivity() {
             return
     }
 
+    //Join tables for video data + thumbnails and feed the ListView
     private fun setupListView(permission : Boolean) {
         if (permission) {
             val externalMediaContentURI = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
@@ -114,17 +102,16 @@ class MainActivity : AppCompatActivity() {
                     // handle case where a row in cursorA is unique
                     CursorJoiner.Result.LEFT -> {
                         finalCursor.addRow(arrayOf(
-                                myVideoCursor.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media._ID)),
-                                myVideoCursor.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.DISPLAY_NAME)),
-                                myVideoCursor.getLong(myVideoCursor.getColumnIndex(MediaStore.Video.Media.DURATION)),
-                                myVideoCursor.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.DATA)),
-                                myVideoCursor.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.HEIGHT)),
-                                myVideoCursor.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.WIDTH)),
+                                myVideoCursor?.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media._ID)),
+                                myVideoCursor?.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.DISPLAY_NAME)),
+                                myVideoCursor?.getLong(myVideoCursor.getColumnIndex(MediaStore.Video.Media.DURATION)),
+                                myVideoCursor?.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.DATA)),
+                                myVideoCursor?.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.HEIGHT)),
+                                myVideoCursor?.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.WIDTH)),
                                 //missing thumbnail case
                                 null,
                                 null
                         ))
-
                     }
                     // handle case where a row in cursorB is unique
                     CursorJoiner.Result.RIGHT -> {
@@ -132,22 +119,20 @@ class MainActivity : AppCompatActivity() {
                     // handle case where a row with the same key is in both cursors
                     CursorJoiner.Result.BOTH -> {
                         finalCursor.addRow(arrayOf(
-                                myVideoCursor.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media._ID)),
-                                myVideoCursor.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.DISPLAY_NAME)),
-                                myVideoCursor.getLong(myVideoCursor.getColumnIndex(MediaStore.Video.Media.DURATION)),
-                                myVideoCursor.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.DATA)),
-                                myVideoCursor.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.HEIGHT)),
-                                myVideoCursor.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.WIDTH)),
-                                myThumbnailCursor.getString(myThumbnailCursor.getColumnIndex(MediaStore.Video.Thumbnails.DATA)),
-                                myThumbnailCursor.getString(myThumbnailCursor.getColumnIndex(MediaStore.Video.Thumbnails.VIDEO_ID))
-
+                                myVideoCursor?.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media._ID)),
+                                myVideoCursor?.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.DISPLAY_NAME)),
+                                myVideoCursor?.getLong(myVideoCursor.getColumnIndex(MediaStore.Video.Media.DURATION)),
+                                myVideoCursor?.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.DATA)),
+                                myVideoCursor?.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.HEIGHT)),
+                                myVideoCursor?.getString(myVideoCursor.getColumnIndex(MediaStore.Video.Media.WIDTH)),
+                                myThumbnailCursor?.getString(myThumbnailCursor.getColumnIndex(MediaStore.Video.Thumbnails.DATA)),
+                                myThumbnailCursor?.getString(myThumbnailCursor.getColumnIndex(MediaStore.Video.Thumbnails.VIDEO_ID))
                         ))
                     }
                 }
             }
-
-            myThumbnailCursor.close()
-            myVideoCursor.close()
+            myThumbnailCursor?.close()
+            myVideoCursor?.close()
 
             val myVideoAdapter = VideoCursorAdapter(this, finalCursor)
             lv_video_list.adapter = myVideoAdapter

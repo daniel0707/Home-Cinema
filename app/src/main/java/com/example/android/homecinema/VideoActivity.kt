@@ -6,9 +6,9 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Gravity
 import android.view.Menu
-import android.view.View
 import android.widget.Toast
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.Node
@@ -19,14 +19,15 @@ import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.BaseArFragment
 import kotlinx.android.synthetic.main.activity_video.*
+import java.lang.Exception
 
 class VideoActivity : AppCompatActivity() {
 
     private lateinit var arFragment: ArFragment
     private lateinit var videoRenderable: ModelRenderable
     private lateinit var mediaPlayer: MediaPlayer
-    lateinit var customHeight : Any
-    lateinit var customWidth : Any
+    private lateinit var customHeight : Any
+    private lateinit var customWidth : Any
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,16 +44,18 @@ class VideoActivity : AppCompatActivity() {
             overridePendingTransition(R.transition.slide_righttoleft, R.transition.hold)
         }
 
-
         arFragment = supportFragmentManager.findFragmentById(R.id.fragment_layout) as ArFragment
 
+        //Fetch video data from passed intent
         val videoItem = intent.getParcelableExtra<VideoItem>("videoParcel")
         val videoURI = Uri.parse(videoItem.path)
 
-        val texture = ExternalTexture()
+        //Set up media player
         mediaPlayer = MediaPlayer.create(this, videoURI)
+        val texture = ExternalTexture()
         mediaPlayer.setSurface(texture.surface)
 
+        //Build a renderable for media player
         ModelRenderable.builder()
                 .setSource(this, R.raw.chroma_key_video)
                 .build()
@@ -87,10 +90,24 @@ class VideoActivity : AppCompatActivity() {
                     videoNode.setParent(anchorNode)
                     videoNode.setLookDirection(videoNode.up)
 
+                    //MediaPlayer can break on initializing and will be not even in error state or any other state
+                    //except the fuck you state that is not detectable and throws IllegalStateException
+                    //Solved by catching ther error and replacing the MediaPlayer with new instance
+                    var videoHeight : Float
+                    var videoWidth : Float
+                    try {
+                        videoWidth = mediaPlayer.videoWidth.toFloat()
+                        videoHeight = mediaPlayer.videoHeight.toFloat()
+                    }catch (e : Exception){
+                        mediaPlayer = MediaPlayer()
+                        mediaPlayer.setDataSource(this,videoURI)
+                        mediaPlayer.setSurface(texture.surface)
+                        mediaPlayer.prepare()
+                        videoWidth = mediaPlayer.videoWidth.toFloat()
+                        videoHeight = mediaPlayer.videoHeight.toFloat()
+                    }
 
-                    val videoWidth = mediaPlayer.videoWidth.toFloat()
-                    val videoHeight = mediaPlayer.videoHeight.toFloat()
-
+                    //Separate case for vertical and horizontal videos
                     if(videoHeight<videoWidth){
                         //width,height,depth = 1
                         videoNode.localScale = Vector3((customWidth as Int)/100f, (customHeight as Int).toFloat()/100f, 1.0f)
@@ -128,7 +145,7 @@ class VideoActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Set toolbar title
-        camerabar_text.text = "Camera"
+        camerabar_text.text = getString(R.string.camerabar)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -155,13 +172,13 @@ class VideoActivity : AppCompatActivity() {
                     customHeight = sharedPref.getInt(getString(R.string.height_preference_key), defaultHeight)
                     customWidth = sharedPref.getInt(getString(R.string.width_preference_key), defaultWidth)
                 }
-    fun toggleVideoPlayPause() {
+    private fun toggleVideoPlayPause() {
         //toggles play & pause on clicks
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
             playbutton.setImageResource(android.R.drawable.ic_media_play)
         } else {
-            mediaPlayer.start();
+            mediaPlayer.start()
             playbutton.setImageResource(android.R.drawable.ic_media_pause)
         }
     }

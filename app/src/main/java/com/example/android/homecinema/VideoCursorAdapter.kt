@@ -1,13 +1,10 @@
 package com.example.android.homecinema
 
-import android.content.ContentResolver
 import android.content.Context
 import android.database.Cursor
 import android.graphics.BitmapFactory
 import android.media.ThumbnailUtils
-import android.net.Uri
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

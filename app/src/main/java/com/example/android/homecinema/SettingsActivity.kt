@@ -1,5 +1,6 @@
 package com.example.android.homecinema
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -17,14 +18,14 @@ import android.widget.*
 import kotlinx.android.synthetic.main.activity_settings.*
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothProfile
-import android.util.Log
-
 
 class SettingsActivity : AppCompatActivity() {
 
     lateinit var customHeight : Any
     lateinit var customWidth : Any
 
+    @SuppressLint("InflateParams", "SetTextI18n")
+    //this view cannot have a parent, text needs to be concatenated
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -53,13 +54,13 @@ class SettingsActivity : AppCompatActivity() {
         //Check if bluetooth is already on and change details text to On
         val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         if (mBluetoothAdapter.state == BluetoothAdapter.STATE_ON){
-            bluetooth_details.text = "On | "
+            bluetooth_details.text = getString(R.string.Bluetooth_On)
         }
         //Check if bluetooth is connected to an audio device and set text accordingly
         if(mBluetoothAdapter.getProfileConnectionState(BluetoothProfile.A2DP) == BluetoothAdapter.STATE_CONNECTED){
-            bluetoothconnection_details.text = "Connected"
+            bluetoothconnection_details.text = getString(R.string.Bluetooth_connected)
         } else if (mBluetoothAdapter.state == BluetoothAdapter.STATE_ON) {
-            bluetoothconnection_details.text = "Disconnected"
+            bluetoothconnection_details.text = getString(R.string.Bluetooth_disconnected)
         }
 
         // BLUETOOTH
@@ -84,10 +85,12 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Set toolbar title
-        settingsbar_text.text = "Settings"
+        settingsbar_text.text = getString(R.string.settingsbar_text)
         return super.onCreateOptionsMenu(menu)
     }
 
+    @SuppressLint("InflateParams", "ObsoleteSdkInt")
+    //this view cannot have a parent, sdk supports legacy
     private fun bluetoothPopup() {
         // Initialize a new layout inflater instance
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -123,9 +126,9 @@ class SettingsActivity : AppCompatActivity() {
         bluetoothClose.setOnClickListener {
             // Dismiss the popup window & check bluetooth connection state
             if(mBluetoothAdapter.getProfileConnectionState(BluetoothProfile.A2DP) == BluetoothAdapter.STATE_CONNECTED) {
-                bluetoothconnection_details.text = "Connected"
+                bluetoothconnection_details.text = getString(R.string.Bluetooth_connected)
             } else if (bluetooth_details.text != "Off"){
-                bluetoothconnection_details.text = "Disconnected"
+                bluetoothconnection_details.text = getString(R.string.Bluetooth_disconnected)
             }
             popupWindow.dismiss()
         }
@@ -145,18 +148,16 @@ class SettingsActivity : AppCompatActivity() {
         switchButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 // The switch is enabled/checked
-                val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
                 if (!mBluetoothAdapter.isEnabled) {
                     mBluetoothAdapter.enable()
-                    bluetooth_details.text = "On | "
+                    bluetooth_details.text = getString(R.string.Bluetooth_On)
                     //open Android bluetooth connection menu
                     startActivity( Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS))
                 }
             } else {
                 // The switch is disabled
-                val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
                 mBluetoothAdapter.disable()
-                bluetooth_details.text = "Off"
+                bluetooth_details.text = getString(R.string.Bluetooth_off)
                 //set connection state textview to empty
                 bluetoothconnection_details.text = ""
             }
@@ -166,6 +167,8 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("InflateParams", "ObsoleteSdkInt", "SetTextI18n", "ApplySharedPref")
+    //Layout needs null as parent, SDK supports legacy, Text has to be concatenated, SharedPref need to be sync
     private fun viewPopup() {
         // Initialize a new layout inflater instance
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -266,6 +269,8 @@ class SettingsActivity : AppCompatActivity() {
         })
     }
 
+    @SuppressLint("InflateParams", "ObsoleteSdkInt")
+    //Layout needs null as parent, SDK checks for legacy situation
     private fun helpPopup() {
         // Initialize a new layout inflater instance
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
