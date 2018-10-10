@@ -8,7 +8,7 @@ So just save any video file to your phone, open our application, choose the vide
 
 ## Getting Started
 
-[Here's a guide to getting started with ionic.](https://developer.android.com/guide/) 
+[Here's a guide to getting started with Android Studio.](https://developer.android.com/guide/) 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes;
 
 Download the project as a zip, unzip it and then open the project in android studio [AndroidStudio](https://developer.android.com/studio/) After that, download yoru android phones OEM USB drivers [USB drivers](https://developer.android.com/studio/run/oem-usb)to your computer.  
