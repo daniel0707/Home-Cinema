@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         checkPermissions()
         setupListView(permissionGranted)
 
@@ -32,6 +33,9 @@ class MainActivity : AppCompatActivity() {
 
         // Set action bar elevation
         actionBar!!.elevation = 4.0F
+
+        //start the bluetooth state change detecting service
+        startService(Intent(this,BluetoothService::class.java))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
