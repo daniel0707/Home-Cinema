@@ -11,7 +11,7 @@ So just save any video file to your phone, open our application, choose the vide
 [Here's a guide to getting started with Android Studio.](https://developer.android.com/guide/) 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes;
 
-Download the project as a zip, unzip it and then open the project in android studio [AndroidStudio](https://developer.android.com/studio/) After that, download yoru android phones OEM USB drivers [USB drivers](https://developer.android.com/studio/run/oem-usb)to your computer.  
+Download the project as a zip, unzip it and then open the project in android studio [AndroidStudio](https://developer.android.com/studio/) After that, download yoru android phones OEM [USB drivers](https://developer.android.com/studio/run/oem-usb) to your computer.  
 After that Android Studio should update all the project requirements for you (APKs etc), please take into consideration that this might take a while. After that just build the project on your phone and you can modify any of the source code to add/delete any features.
 
 ### Prerequisites
@@ -34,5 +34,5 @@ Programming languages used:
 * **Joonas Leonsaari**
 * **Daniel Vahla**
 
-##Link to Project flow & management:
+## Link to Project flow & management:
 [Trello](https://trello.com/b/QI9bpBYC/home-cinema)
