@@ -33,4 +33,19 @@
     <string name="Bluetooth_disconnected">Disconnected</string>
     <string name="settingsbar_text">Settings</string>
     <string name="Bluetooth_off">Off</string>
+    <string name="splash_screen_name">Splash screen</string>
+    <string name="settings">Settings</string>
+    <string name="camera_text">Camera</string>
+    <string name="close_me">Close Me</string>
+    <string name="bluetooth_help">Tap to turn on Bluetooth</string>
+    <string name="close_me">Close Me</string>
+    <string name="about">This application was created as a school project.</string>
+    <string name="about_help">The application can be used for playing a video file from your phone on the application\'s AR camera! To play a file, simply choose one from the scrollable list and the application will take care of the rest!</string>
+    <string name="about_extra">Find more information at:</string>
+    <string name="github_readme">https://github.com/daniel0707/Home-Cinema/blob/master/README.md</string>
+    <string name="close_me">Close Me</string>
+    <string name="user_request_width">Input a width</string>
+    <string name="user_request_height">Input a height</string>
+    <string name="current_object_size">*Current object size:</string>
+    <string name="choose_a_video">Choose a video</string>
 </resources>

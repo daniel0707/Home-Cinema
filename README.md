@@ -16,14 +16,16 @@ After that Android Studio should update all the project requirements for you (AP
 
 ### Prerequisites
 Kotlin for Android Studio
+
 Android Studio
 #### If u want to run the application on your phone:
 OEM USB drivers for your android phone model
+
 A usb type-C cable or any suitable cable that your android phone can use to connect it to your computer
 
 
 ## Built With
-* [Android Studio](https://developer.android.com/studio/) - A Framework built on Angular. Used for developing a hybrid mobile application.
+* [Android Studio](https://developer.android.com/studio/)
 
 Programming languages used:
 * Kotlin - Used for functionalities

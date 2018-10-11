@@ -19,7 +19,7 @@
         android:contentDescription="@string/exit"
         android:padding="10dp"
         android:src="@drawable/ic_outline_close_24px"
-        android:text="Close Me" />
+        android:text="@string/close_me" />
 
     <TextView
         android:layout_width="match_parent"
@@ -29,22 +29,22 @@
         android:contentDescription="@string/viewdescription"
         android:text="@string/viewdescription" />
 
+    <!-- Edit Width -->
+    <EditText
+        android:id="@+id/view_width"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/user_request_width"
+        android:inputType="number"
+        android:textColor="#777" />
+
     <!-- Edit Height -->
     <EditText
         android:id="@+id/view_height"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:hint="Input a height"
-        android:inputType="number"
-        android:textColor="#777" />
-
-    <!-- Edit Width -->
-    <EditText
-        android:id="@+id/view_width"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Input a width"
+        android:hint="@string/user_request_height"
         android:inputType="number"
         android:textColor="#777" />
 
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginStart="5dp"
-            android:text="*Current object size: " />
+            android:text="@string/current_object_size" />
 
         <TextView
             android:id="@+id/customDimensionWidth"

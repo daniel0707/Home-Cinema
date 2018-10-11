@@ -16,7 +16,7 @@
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="@string/exit"
         android:src="@drawable/ic_outline_close_24px"
-        android:text="Close Me" />
+        android:text="@string/close_me" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -41,14 +41,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Tap to turn on Bluetooth"
+                android:text="@string/bluetooth_help"
                 android:textSize="20sp" />
 
             <Switch
                 android:id="@+id/switch_button"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:contentDescription="@string/bluebooth" />
 
         </LinearLayout>
